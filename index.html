@@ -1,0 +1,29 @@
+<html>
+  <head>
+    <title>Event count down</title>
+    <link rel="stylesheet" href="css/custom.css">
+  </head>
+  <body>
+    <div class="container">
+      <form class="event-creator">
+        <label for="title">Enter title</label>
+        <input type="text" name="title">
+
+        <label for="date">Enter date</label>
+        <input type="date" name="date" required>
+
+        <label for="time">Enter time</label>
+        <input type="time" name="time" required>
+
+        <input type="submit" value="Go">
+      </form>
+
+      <ul class="events-list">
+        <li>
+          <span class="title"></span>: <span class="days"></span>:<span class="hours"></span>:<span class="mins"></span>:<span class="secs"></span>
+        </li>
+      </ul>
+    </div>
+  </body>
+  <script src="js/custom.js"></script>
+</html>

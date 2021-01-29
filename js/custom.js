@@ -24,18 +24,11 @@ form.addEventListener('submit', function (e) {
         let secsHolder  = document.querySelector('.secs' + eventsCounter);
         let titleHolder = document.querySelector('.title' + eventsCounter);
 
-        console.log(daysHolder);
-
-        daysHolder.innerText = "0";
-        hoursHolder.innerText = "0";
-        minsHolder.innerText = "0";
-        secsHolder.innerText = "0";
-        titleHolder.innerText = title;
-    
+        
         let datetime = new Date(date + ' ' + time);
         let now = new Date();
         let dateDiff = (datetime - now) / 1000;
-    
+        
         // Days
         let days = Math.floor(dateDiff / 86400);
         dateDiff -= days * 86400;
@@ -43,24 +36,27 @@ form.addEventListener('submit', function (e) {
         // Hours
         let hours = Math.floor(dateDiff / 3600);
         dateDiff -= hours * 3600;
-    
+        
         // Mins
         let mins = Math.floor(dateDiff / 60);
         dateDiff -= mins * 60;
-    
+        
         // Secs
         let secs = Math.floor(dateDiff);
-    
-        // console.log(days, hours, mins, secs);
+        
+        daysHolder.innerText = days;
+        hoursHolder.innerText = hours;
+        minsHolder.innerText = mins;
+        secsHolder.innerText = secs;
+        titleHolder.innerText = title;
     
         let it = nextSec(days, hours, mins, secs);
     
         let sec = it.next();
         
         let intervalId = setInterval( function () { 
-            console.log(sec);
             if (sec.done) {
-                alert("Event is now!");
+                alert(title + " event is now!");
                 clearInterval(intervalId);
                 return;
             }
@@ -71,7 +67,7 @@ form.addEventListener('submit', function (e) {
             secsHolder.innerText = sec.value.secs;
     
             sec = it.next();
-        }, 1000, sec, it, days, hours, mins, secs);
+        }, 1000, sec, it, days, hours, mins, secs, title);
     }
     
 });

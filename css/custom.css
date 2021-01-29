@@ -1,0 +1,40 @@
+body {
+    padding: 0;
+    margin: 0;
+    background-color: #DDD;
+}
+
+.container {
+    width: 30%;
+    margin: auto;
+}
+
+form label {
+    display: block;
+    font-size: 25px;
+    margin-bottom: 5px;
+}
+
+form input {
+    border: none;
+    display: block;
+    border-radius: 5px;
+    padding: 3px 5px;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.events-list li {
+    padding: 10px 15px;
+    font-size: 30px;
+    border-radius: 5px;
+    margin-top: 20px;
+    border: 3px solid #333;
+    color: #333;
+}

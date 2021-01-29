@@ -1,11 +1,6 @@
 let form = document.querySelector('.event-creator');
-let daysHolder = document.querySelector('.days');
-let hoursHolder = document.querySelector('.hours');
-let minsHolder = document.querySelector('.mins');
-let secsHolder = document.querySelector('.secs');
-let titleHolder = document.querySelector('.title');
-
-console.log(titleHolder);
+let eventsList = document.querySelector('.events-list');
+let eventsCounter = 0;
 
 form.addEventListener('submit', function (e) {
     e.preventDefault();
@@ -13,62 +8,72 @@ form.addEventListener('submit', function (e) {
     let date = this['date'].value;
     let time = this['time'].value;
 
-    console.log(title);
-    daysHolder.innerText = "0";
-    hoursHolder.innerText = "0";
-    minsHolder.innerText = "0";
-    secsHolder.innerText = "0";
-    titleHolder.innerText = title;
+    if (!title || !date || !time) {
+        alert("Enter data to begin coutdown");
+    } else {
+        eventsCounter++;
+        eventsList.innerHTML += `
+        <li>
+            <span class="title${eventsCounter}"></span>: <span class="days${eventsCounter}"></span>:<span class="hours${eventsCounter}"></span>:<span class="mins${eventsCounter}"></span>:<span class="secs${eventsCounter}"></span>
+        </li>
+        `;
 
-    let datetime = new Date(date + ' ' + time);
-    let now = new Date();
-    let dateDiff = (datetime - now) / 1000;
+        let daysHolder  = document.querySelector('.days' + eventsCounter);
+        let hoursHolder = document.querySelector('.hours' + eventsCounter);
+        let minsHolder  = document.querySelector('.mins' + eventsCounter);
+        let secsHolder  = document.querySelector('.secs' + eventsCounter);
+        let titleHolder = document.querySelector('.title' + eventsCounter);
 
-    // Days
-    let days = Math.floor(dateDiff / 86400);
-    dateDiff -= days * 86400;
+        console.log(daysHolder);
 
-    // Hours
-    let hours = Math.floor(dateDiff / 3600);
-    dateDiff -= hours * 3600;
-
-    // Mins
-    let mins = Math.floor(dateDiff / 60);
-    dateDiff -= mins * 60;
-
-    // Secs
-    let secs = Math.floor(dateDiff);
-
-    // console.log(days, hours, mins, secs);
-
-    let it = nextSec(days, hours, mins, secs);
-
-    let sec = it.next();
+        daysHolder.innerText = "0";
+        hoursHolder.innerText = "0";
+        minsHolder.innerText = "0";
+        secsHolder.innerText = "0";
+        titleHolder.innerText = title;
     
-    let intervalId = setInterval( function () { 
-        console.log(sec);
-        if (sec.done) {
-            alert("Event is now!");
-            clearInterval(intervalId);
-            return;
-        }
-        
-        daysHolder.innerText = sec.value.days;
-        hoursHolder.innerText = sec.value.hours;
-        minsHolder.innerText = sec.value.mins;
-        secsHolder.innerText = sec.value.secs;
-
-        sec = it.next();
-    }, 1000, sec, it, days, hours, mins, secs);
-
-    // while (!sec.done) {
-        
-    //     sec = it.next();
-    // }
+        let datetime = new Date(date + ' ' + time);
+        let now = new Date();
+        let dateDiff = (datetime - now) / 1000;
     
-    // for (const second of it) {
-    //     console.log(second);
-    // }
+        // Days
+        let days = Math.floor(dateDiff / 86400);
+        dateDiff -= days * 86400;
+    
+        // Hours
+        let hours = Math.floor(dateDiff / 3600);
+        dateDiff -= hours * 3600;
+    
+        // Mins
+        let mins = Math.floor(dateDiff / 60);
+        dateDiff -= mins * 60;
+    
+        // Secs
+        let secs = Math.floor(dateDiff);
+    
+        // console.log(days, hours, mins, secs);
+    
+        let it = nextSec(days, hours, mins, secs);
+    
+        let sec = it.next();
+        
+        let intervalId = setInterval( function () { 
+            console.log(sec);
+            if (sec.done) {
+                alert("Event is now!");
+                clearInterval(intervalId);
+                return;
+            }
+            
+            daysHolder.innerText = sec.value.days;
+            hoursHolder.innerText = sec.value.hours;
+            minsHolder.innerText = sec.value.mins;
+            secsHolder.innerText = sec.value.secs;
+    
+            sec = it.next();
+        }, 1000, sec, it, days, hours, mins, secs);
+    }
+    
 });
 
 function* nextSec (days, hours, mins, secs) {

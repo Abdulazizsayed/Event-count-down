@@ -7,7 +7,7 @@
     <div class="container">
       <form class="event-creator">
         <label for="title">Enter title</label>
-        <input type="text" name="title">
+        <input type="text" name="title" required>
 
         <label for="date">Enter date</label>
         <input type="date" name="date" required>
@@ -18,11 +18,7 @@
         <input type="submit" value="Go">
       </form>
 
-      <ul class="events-list">
-        <li>
-          <span class="title"></span>: <span class="days"></span>:<span class="hours"></span>:<span class="mins"></span>:<span class="secs"></span>
-        </li>
-      </ul>
+      <ul class="events-list"></ul>
     </div>
   </body>
   <script src="js/custom.js"></script>

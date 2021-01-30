@@ -12,11 +12,12 @@ form.addEventListener('submit', function (e) {
         alert("Enter data to begin coutdown");
     } else {
         eventsCounter++;
-        eventsList.innerHTML += `
-        <li>
-            <span class="title${eventsCounter}"></span>: <span class="days${eventsCounter}"></span>:<span class="hours${eventsCounter}"></span>:<span class="mins${eventsCounter}"></span>:<span class="secs${eventsCounter}"></span>
-        </li>
-        `;
+        // eventsList.innerHTML += `
+        // <li>
+        //     <span class="title${eventsCounter}"></span>: <span class="days${eventsCounter}"></span>:<span class="hours${eventsCounter}"></span>:<span class="mins${eventsCounter}"></span>:<span class="secs${eventsCounter}"></span>
+        // </li>
+        // `;
+        eventsList.insertAdjacentHTML('beforeend', `<li><span class="title${eventsCounter}"></span>: <span class="days${eventsCounter}"></span>:<span class="hours${eventsCounter}"></span>:<span class="mins${eventsCounter}"></span>:<span class="secs${eventsCounter}"></span></li>`);
 
         let daysHolder  = document.querySelector('.days' + eventsCounter);
         let hoursHolder = document.querySelector('.hours' + eventsCounter);
